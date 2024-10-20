@@ -6,6 +6,12 @@ class Router
 {
     public function dispatch($url)
     {
+        $baseDir = '/Agendify';
+
+        if (strpos($url, $baseDir) === 0) {
+            $url = substr($url, strlen($baseDir));
+        }
+
         $url = explode('/', filter_var(rtrim($url, '/'), FILTER_SANITIZE_URL));
 
         $controllerName = !empty($url[0]) ? ucfirst($url[0]) . 'Controller' : 'HomeController';
