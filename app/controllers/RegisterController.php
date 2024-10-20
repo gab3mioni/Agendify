@@ -4,8 +4,10 @@ namespace App\Controllers;
 use App\Models\RegisterModel;
 use Core\Controller;
 
-class RegisterController extends Controller {
-    public function index() {
+class RegisterController extends Controller
+{
+    public function index()
+    {
 
         $this->view('register');
     }

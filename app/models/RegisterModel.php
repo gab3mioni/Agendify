@@ -3,7 +3,8 @@
 namespace App\Models;
 use PDO;
 
-class RegisterModel {
+class RegisterModel
+{
 
     private $pdo;
 
