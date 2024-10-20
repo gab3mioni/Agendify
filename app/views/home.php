@@ -10,7 +10,7 @@
     <div class="container mt-5">
         <h1 class="text-center">Bem-vindo à Página Inicial!</h1>
         <div class="text-center">
-            <a href="user" class="btn btn-primary mt-3">Ir para Usuários</a>
+            <a href="register" class="btn btn-primary mt-3">Registrar</a>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
