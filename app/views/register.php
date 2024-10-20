@@ -4,58 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
-<?php if (isset($errorMessage)): ?>
-    <div class="alert alert-danger">
-        <?php echo $errorMessage; ?>
-    </div>
-<?php endif; ?>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5 shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Registre-se no Agendify</h2>
 
-<?php if (isset($successMessage)): ?>
-    <div class="alert alert-success">
-        <?php echo $successMessage; ?>
-    </div>
-<?php endif; ?>
+                    <?php if (isset($errorMessage)): ?>
+                        <div class="alert alert-danger">
+                            <?php echo $errorMessage; ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($successMessage)): ?>
+                        <div class="alert alert-success">
+                            <?php echo $successMessage; ?>
+                        </div>
+                    <?php endif; ?>
 
-<main>
-    <div class="container mt-5">
-        <h1 class="text-center">Registre-se no Agendify</h1>
+                    <form action="register/register" method="POST">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="nome" name="name" placeholder="Digite seu nome completo" required>
+                        </div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form action="register/register" method="POST">
-                    <div class="form-group">
-                        <label for="nome">Nome Completo</label>
-                        <input type="text" class="form-control" id="nome" name="name" placeholder="Digite seu nome completo" required>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="senha" name="password" placeholder="Digite sua senha" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="confirmar-senha" class="form-label">Confirmar Senha</label>
+                            <input type="password" class="form-control" id="confirmar-senha" name="confirm_password" placeholder="Confirme sua senha" required>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </form>
+
+                    <div class="mt-3 text-center">
+                        <a href="login">Já tem uma conta? Faça login</a>
                     </div>
-
-                    <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="senha">Senha</label>
-                        <input type="password" class="form-control" id="senha" name="password" placeholder="Digite sua senha" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirmar-senha">Confirmar Senha</label>
-                        <input type="password" class="form-control" id="confirmar-senha" name="confirm_password" placeholder="Confirme sua senha" required>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-block">Registrar</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</main>
+</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
