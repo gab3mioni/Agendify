@@ -13,7 +13,7 @@
     <a href="#">Dashboard</a>
     <a href="#">Agenda</a>
     <a href="#">Configurações</a>
-    <a href="#">Sair</a>
+    <a href="logout">Sair</a>
 </nav>
 
 <div class="container">
