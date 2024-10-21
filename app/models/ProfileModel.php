@@ -21,4 +21,12 @@ class ProfileModel
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function editEmail($email, $newEmail)
+    {
+        $stmt = $this->pdo->prepare("UPDATE users SET email = :newEmail WHERE email = :email");
+        $stmt->bindParam(':newEmail', $newEmail);
+        $stmt->bindParam(':email', $email);
+        return $stmt->execute();
+    }
 }

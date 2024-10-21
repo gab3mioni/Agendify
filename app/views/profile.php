@@ -24,12 +24,29 @@
         <div class="card mt-4">
             <div class="card-body">
                 <h5 class="card-title">Nome: <?php echo htmlspecialchars($profile['name']); ?></h5>
-                <p class="card-text">E-mail: <?php echo htmlspecialchars($profile['email']); ?></p>
+                <p class="card-text">E-mail atual: <?php echo htmlspecialchars($profile['email']); ?></p>
             </div>
         </div>
 
+        <div class="mt-4">
+            <h4>Alterar E-mail</h4>
+            <?php if(isset($errorMessage)): ?>
+                <div class="alert alert-danger"><?php echo $errorMessage; ?></div>
+            <?php endif; ?>
+            <?php if(isset($successMessage)): ?>
+                <div class="alert alert-success"><?php echo $successMessage; ?></div>
+            <?php endif; ?>
+            <form method="POST" action="profile">
+                <div class="mb-3">
+                    <label for="new_email" class="form-label">Novo E-mail</label>
+                    <input type="email" class="form-control" id="new_email" name="new_email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Atualizar E-mail</button>
+            </form>
+        </div>
+
         <div class="text-center mt-3">
-            <a href="dashboard" class="btn btn-primary">Voltar para o Dashboard</a>
+            <a href="dashboard" class="btn btn-secondary">Voltar para o Dashboard</a>
         </div>
     </div>
 </div>
