@@ -39,7 +39,6 @@
 
                     <div class="mt-3 text-center">
                         <a href="register">Não tem uma conta? Cadastre-se</a> <br>
-                        <a href="">Esqueceu sua senha?</a>
                     </div>
                 </div>
             </div>
