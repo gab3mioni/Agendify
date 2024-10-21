@@ -1,5 +1,5 @@
 # Agendify
-Sistema em PHP que permite um usuário agendar compromissos e reuniões, com posssíveis integrações via e-mail (apenas para lembretes), WhatsApp (para receber lembrete e confirmação) e atualizar compromissos com o Google Calendar. As integrações ficam a critério do usuário, na configuração do seu perfil.
+Sistema em PHP que permite um usuário agendar compromissos e reuniões, com posssíveis integrações via e-mail (apenas para lembretes), WhatsApp (para receber lembrete e confirmação) e atualizar compromissos com o Google Calendar. 
 
 O sistema ainda está na sua fase inicial de desenvolvimento.
 
