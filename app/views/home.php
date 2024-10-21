@@ -29,46 +29,17 @@
 <header class="bg-primary text-white text-center py-5">
     <div class="container">
         <h1 class="display-4">Bem-vindo ao Agendify</h1>
-        <p class="lead">A solução ideal para gerenciar sua clínica e consultório de forma inteligente e automatizada.</p>
         <a href="register" class="btn btn-light btn-lg mt-3">Comece Agora</a>
     </div>
 </header>
 
 <main class="py-5">
     <div class="container">
-        <section class="mb-5">
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Gerenciamento de Pacientes</h5>
-                            <p class="card-text">Organize os dados dos seus pacientes de forma fácil e acessível, tudo em um só lugar.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Agenda Inteligente</h5>
-                            <p class="card-text">Agende e gerencie suas consultas com um sistema de calendário integrado e notificações automáticas.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Relatórios Financeiros</h5>
-                            <p class="card-text">Visualize facilmente o fluxo financeiro do seu consultório, com relatórios detalhados e gráficos.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section>
             <div class="text-center">
                 <h2 class="mb-4">Por que escolher o Agendify?</h2>
-                <p class="lead">Nosso software oferece tudo o que você precisa para gerenciar seu consultório de forma prática e eficiente. Com ferramentas intuitivas e automação de processos, você terá mais tempo para focar no que realmente importa: seus pacientes.</p>
+                <p class="lead">Nosso software oferece tudo o que você precisa para gerenciar seu dia de forma prática e eficiente.</p>
             </div>
         </section>
     </div>
