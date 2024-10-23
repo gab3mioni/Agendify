@@ -10,8 +10,8 @@
 <body>
 
 <nav class="sidebar">
-    <a href="#">Dashboard</a>
-    <a href="#">Agenda</a>
+    <a href="dashboard">Dashboard</a>
+    <a href="agenda">Agenda</a>
     <a href="profile">Editar Perfil</a>
     <a href="#">Configurações</a>
     <a href="logout">Sair</a>
