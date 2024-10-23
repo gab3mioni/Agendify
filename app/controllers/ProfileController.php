@@ -39,6 +39,8 @@ class ProfileController extends Controller
         unset($_SESSION['successMessage']);
 
         if($profile) {
+            $_SESSION['email'] = $profile['email'];
+            $_SESSION['phone_number'] = $profile['phone_number'];
             include '../app/views/profile.php';
         } else {
             $_SESSION['errorMessage'] = "Usuário não encontrado!";
