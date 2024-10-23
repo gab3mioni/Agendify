@@ -29,4 +29,12 @@ class ProfileModel
         $stmt->bindParam(':email', $email);
         return $stmt->execute();
     }
+    
+    public function editPhone($phone, $newPhone)
+    {
+        $stmt = $this->pdo->prepare("UPDATE users SET phone_number = :newPhone WHERE phone_number = :phone");
+        $stmt->bindParam(':newPhone', $newPhone);
+        $stmt->bindParam(':phone', $phone);
+        return $stmt->execute();
+    }
 }

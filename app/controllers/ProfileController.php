@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ProfileModel;
 use App\Services\EmailValidator;
+use App\Services\PhoneValidator;
 use Core\Controller;
 
 class ProfileController extends Controller
@@ -29,6 +30,12 @@ class ProfileController extends Controller
 
         $profileModel = new ProfileModel();
         $profile = $profileModel->getUserByEmail($_SESSION['email']);
+
+        $errorMessage = isset($_SESSION['errorMessage']) ? $_SESSION['errorMessage'] : null;
+        $successMessage = isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : null;
+
+        unset($_SESSION['errorMessage']);
+        unset($_SESSION['successMessage']);
 
         if($profile) {
             include '../app/views/profile.php';
@@ -58,9 +65,29 @@ class ProfileController extends Controller
             header('Location: /Agendify/public/profile');
             exit;
         }
-
         $this->profile();
     }
 
+    public function updatePhone()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_phone'])) {
+            $newPhone = $_POST['new_phone'];
+            $profileModel = new ProfileModel();
+            $validator = new PhoneValidator();
 
+            if ($validator->validatePhone($newPhone)) {
+                if ($profileModel->editPhone($_SESSION['phone_number'], $newPhone)) {
+                    $_SESSION['phone_number'] = $newPhone;
+                    $_SESSION['successMessage'] = "Telefone atualizado com sucesso!";
+                } else {
+                    $_SESSION['errorMessage'] = "Erro ao atualizar o telefone!";
+                }
+            } else {
+                $_SESSION['errorMessage'] = "Telefone inválido.";
+            }
+            header('Location: /Agendify/public/profile');
+            exit;
+        }
+        $this->profile();
+    }
 }
