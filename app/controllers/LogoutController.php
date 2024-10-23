@@ -19,7 +19,7 @@ class LogoutController extends Controller
 
         session_destroy();
 
-        header('Location: home');
+        header('Location: /Agendify/public/login');
         exit;
     }
 }
