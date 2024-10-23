@@ -32,7 +32,6 @@ class ProfileController extends Controller
 
         if($profile) {
             include '../app/views/profile.php';
-            return;
         } else {
             $errorMessage = "Usuário não encontrado!";
             include '../app/views/profile.php';
