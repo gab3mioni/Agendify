@@ -15,7 +15,7 @@ class ProfileModel
 
     public function getUserByEmail($email)
     {
-        $stmt = $this->pdo->prepare("SELECT name, email FROM users WHERE email = :email");
+        $stmt = $this->pdo->prepare("SELECT name, email, phone_number FROM users WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 

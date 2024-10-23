@@ -24,7 +24,8 @@
         <div class="card mt-4">
             <div class="card-body">
                 <h5 class="card-title">Nome: <?php echo htmlspecialchars($profile['name']); ?></h5>
-                <p class="card-text">E-mail atual: <?php echo htmlspecialchars($profile['email']); ?></p>
+                <p class="card-text">Telefone: <?php echo htmlspecialchars($profile['phone_number']); ?></p>
+                <p class="card-text">E-mail: <?php echo htmlspecialchars($profile['email']); ?></p>
             </div>
         </div>
 
