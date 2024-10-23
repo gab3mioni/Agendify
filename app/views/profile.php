@@ -36,7 +36,7 @@
             <?php if(isset($successMessage)): ?>
                 <div class="alert alert-success"><?php echo $successMessage; ?></div>
             <?php endif; ?>
-            <form method="POST" action="profile">
+            <form method="POST" action="profile/updateEmail">
                 <div class="mb-3">
                     <label for="new_email" class="form-label">Novo E-mail</label>
                     <input type="email" class="form-control" id="new_email" name="new_email" required>
