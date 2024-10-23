@@ -24,7 +24,8 @@ class ProfileController extends Controller
     {
 
         if(!isset($_SESSION['email'])) {
-            header('location: home');
+            $_SESSION['errorMessage'] = "Usuário não encontrado!";
+            header('Location: /Agendify/public/login');
             exit;
         }
 
@@ -40,8 +41,8 @@ class ProfileController extends Controller
         if($profile) {
             include '../app/views/profile.php';
         } else {
-            $errorMessage = "Usuário não encontrado!";
-            include '../app/views/profile.php';
+            $_SESSION['errorMessage'] = "Usuário não encontrado!";
+            header('Location: /Agendify/public/login');
         }
     }
 
