@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Services\DateValidator;
 use Core\Controller;
 use App\Models\AgendaModel;
 
@@ -42,14 +43,21 @@ class AgendaController extends Controller
             $reminderWhatsapp = "true";
 
             if(!empty($title) && !empty($description) && !empty($date)) {
-                $appointmentModel = new AgendaModel();
-                $appointment = $appointmentModel->createAppointment($userId, $title, $description, $date, $reminderEmail, $reminderWhatsapp);
+                $validateDate = new DateValidator();
+                $validateDate->validateDate($date);
+                if($validateDate) {
+                    $appointmentModel = new AgendaModel();
+                    $appointment = $appointmentModel->createAppointment($userId, $title, $description, $date, $reminderEmail, $reminderWhatsapp);
 
-                if($appointment) {
-                    $_SESSION['successMessage'] = "Compromisso criado com sucesso!";
+                    if($appointment) {
+                        $_SESSION['successMessage'] = "Compromisso criado com sucesso!";
+                    } else {
+                        $_SESSION['errorMessage'] = "Erro ao criar o compromisso!";
+                    }
                 } else {
-                    $_SESSION['errorMessage'] = "Erro ao criar o compromisso!";
+                    $_SESSION['errorMessage'] = "Data inválida!";
                 }
+
             } else {
                 $_SESSION['errorMessage'] = "Os campos não podem ser vazios!";
             }
