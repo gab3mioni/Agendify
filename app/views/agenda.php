@@ -48,6 +48,14 @@
                                 <label for="date" class="form-label">Data</label>
                                 <input type="date" class="form-control" name="date" id="date" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="start_time" class="form-label">Hora de Início</label>
+                                <input type="time" class="form-control" name="start_time" id="start_time" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="end_time" class="form-label">Hora de Término</label>
+                                <input type="time" class="form-control" name="end_time" id="end_time" required>
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                                 <button type="submit" class="btn btn-primary">Adicionar</button>
