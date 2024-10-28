@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\ProfileModel;
-use App\Services\EmailValidator;
-use App\Services\PhoneValidator;
+use App\Services\Validation\EmailValidator;
+use App\Services\Validation\PhoneValidator;
 use Core\Controller;
 
 class ProfileController extends Controller

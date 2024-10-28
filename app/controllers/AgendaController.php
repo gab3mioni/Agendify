@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Services\DateValidator;
-use Core\Controller;
 use App\Models\AgendaModel;
+use App\Services\Validation\DateValidator;
+use Core\Controller;
 
 class AgendaController extends Controller
 {
