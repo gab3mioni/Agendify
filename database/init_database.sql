@@ -15,6 +15,8 @@ CREATE TABLE appointments
     title                    VARCHAR(150) NOT NULL,
     description              TEXT,
     appointment_date         TIMESTAMP    NOT NULL,
+    start_time               TIME NOT NULL,
+    end_time                 TIME NOT NULL,
     reminder_email           BOOLEAN   DEFAULT FALSE,
     reminder_whatsapp        BOOLEAN   DEFAULT FALSE,
     google_calendar_event_id VARCHAR(255),
