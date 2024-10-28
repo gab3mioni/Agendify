@@ -53,7 +53,7 @@
                     </form>
 
                     <div class="mt-3 text-center">
-                        <a href="login">Já tem uma conta? Faça login</a>
+                        <a href="/Agendify/public/login">Já tem uma conta? Faça login</a>
                     </div>
                 </div>
             </div>
