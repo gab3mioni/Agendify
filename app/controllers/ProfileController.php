@@ -3,16 +3,23 @@
 namespace App\Controllers;
 
 use App\Models\ProfileModel;
+use App\Services\AuthService;
 use App\Services\Validation\EmailValidator;
 use App\Services\Validation\PhoneValidator;
 use Core\Controller;
 
 class ProfileController extends Controller
 {
+    private $authService;
+
     public function __construct()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+        $this->authService = new AuthService();
+
+        if (!$this->authService->isAuthenticated()) {
+            $_SESSION['errorMessage'] = "Usuário não encontrado!";
+            header('Location: /Agendify/public/login');
+            exit;
         }
     }
 
@@ -23,23 +30,17 @@ class ProfileController extends Controller
 
     public function profile(): void
     {
-
-        if(!isset($_SESSION['email'])) {
-            $_SESSION['errorMessage'] = "Usuário não encontrado!";
-            header('Location: /Agendify/public/login');
-            exit;
-        }
+        $email = $this->authService->getUserEmail();
 
         $profileModel = new ProfileModel();
-        $profile = $profileModel->getUserByEmail($_SESSION['email']);
+        $profile = $profileModel->getUserByEmail($email);
 
-        $errorMessage = isset($_SESSION['errorMessage']) ? $_SESSION['errorMessage'] : null;
-        $successMessage = isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : null;
+        $errorMessage = $_SESSION['errorMessage'] ?? null;
+        $successMessage = $_SESSION['successMessage'] ?? null;
 
-        unset($_SESSION['errorMessage']);
-        unset($_SESSION['successMessage']);
+        unset($_SESSION['errorMessage'], $_SESSION['successMessage']);
 
-        if($profile) {
+        if ($profile) {
             $_SESSION['email'] = $profile['email'];
             $_SESSION['phone_number'] = $profile['phone_number'];
             include '../app/views/profile.php';
@@ -57,7 +58,7 @@ class ProfileController extends Controller
             $validator = new EmailValidator();
 
             if ($validator->validateEmail($newEmail)) {
-                if ($profileModel->editEmail($_SESSION['email'], $newEmail)) {
+                if ($profileModel->editEmail($this->authService->getUserEmail(), $newEmail)) {
                     $_SESSION['email'] = $newEmail;
                     $_SESSION['successMessage'] = "E-mail atualizado com sucesso!";
                 } else {
