@@ -6,13 +6,12 @@ use Core\Controller;
 
 class RegisterController extends Controller
 {
-    public function index()
+    public function index(): void
     {
-
         $this->view('register');
     }
 
-    public function register()
+    public function register(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'] ?? null;

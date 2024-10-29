@@ -18,7 +18,7 @@ class AgendaController extends Controller
         }
     }
 
-    public function index()
+    public function index(): void
     {
         $this->view('agenda');
     }
@@ -34,7 +34,7 @@ class AgendaController extends Controller
         }
     }
 
-    public function addAppointment()
+    public function addAppointment(): void
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 

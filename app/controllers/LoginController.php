@@ -7,16 +7,16 @@ use Core\Controller;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function index(): void
     {
         $this->view('login');
     }
 
-    public function base_url($path = '') {
+    public function base_url($path = ''): string {
         return 'http://' . $_SERVER['HTTP_HOST'] . '/Agendify/public/' . ltrim($path, '/');
     }
 
-    public function login()
+    public function login(): void
     {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 

@@ -8,7 +8,7 @@ use App\Services\Validation\EmailValidator;
 class RegisterService
 {
 
-    public function validateRegistrationData($name, $email, $password, $confirm_password)
+    public function validateRegistrationData($name, $email, $password, $confirm_password): array
     {
         if(empty($name) || empty($email) || empty($password) || empty($confirm_password)) {
             return ['isValid' => false, 'message' => 'Todos os campos são obrigatórios.'];

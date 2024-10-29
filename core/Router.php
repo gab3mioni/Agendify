@@ -4,7 +4,7 @@ namespace Core;
 
 class Router
 {
-    public function dispatch($url)
+    public function dispatch($url): void
     {
         $baseDir = '/Agendify';
 

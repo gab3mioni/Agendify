@@ -15,12 +15,13 @@ class ProfileController extends Controller
             session_start();
         }
     }
-    public function index()
+
+    public function index(): void
     {
         $this->profile();
     }
 
-    public function profile()
+    public function profile(): void
     {
 
         if(!isset($_SESSION['email'])) {
@@ -48,7 +49,7 @@ class ProfileController extends Controller
         }
     }
 
-    public function updateEmail()
+    public function updateEmail(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_email'])) {
             $newEmail = $_POST['new_email'];
@@ -71,7 +72,7 @@ class ProfileController extends Controller
         $this->profile();
     }
 
-    public function updatePhone()
+    public function updatePhone(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_phone'])) {
             $newPhone = $_POST['new_phone'];

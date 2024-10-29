@@ -7,11 +7,12 @@ use Core\Controller;
 class LogoutController extends Controller
 {
 
-    public function index()
+    public function index(): void
     {
         $this->logout();
     }
-    public function logout()
+
+    public function logout(): void
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();

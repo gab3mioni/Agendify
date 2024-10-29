@@ -5,8 +5,7 @@ use Core\Controller;
 
 class DashboardController extends Controller
 {
-    public function index() {
-
+    public function index(): void {
         $this->view('dashboard');
     }
 }
