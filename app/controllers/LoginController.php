@@ -12,7 +12,8 @@ class LoginController extends Controller
         $this->view('login');
     }
 
-    public function base_url($path = ''): string {
+    public function base_url($path = ''): string
+    {
         return 'http://' . $_SERVER['HTTP_HOST'] . '/Agendify/public/' . ltrim($path, '/');
     }
 
