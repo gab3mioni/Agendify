@@ -27,8 +27,7 @@ class AgendaController extends Controller
         $userId = $authService->getUserId();
 
         if (!$userId) {
-            $logoutController = new LogoutController();
-            $logoutController->logout();
+            $authService->logout();
             return;
         }
 

@@ -1,26 +1,19 @@
 <?php
 
 namespace App\Controllers;
+use App\Services\AuthService;
 
-use Core\Controller;
-
-class LogoutController extends Controller
+class LogoutController
 {
+    private AuthService $authService;
 
-    public function index(): void
+    public function __construct()
     {
-        $this->logout();
+        $this->authService = new AuthService();
     }
 
-    public function logout(): void
+    public function index()
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        session_destroy();
-
-        header('Location: /Agendify/public/login');
-        exit;
+        $this->authService->logout();
     }
 }
