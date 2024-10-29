@@ -39,6 +39,11 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="phone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="(00) 00000-0000" required>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="senha" class="form-label">Senha</label>
                             <input type="password" class="form-control" id="senha" name="password" placeholder="Digite sua senha" required>
                         </div>
