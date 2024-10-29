@@ -8,14 +8,14 @@ class Router
     {
         $baseDir = '/Agendify';
 
-        if (strpos($url, $baseDir) === 0) {
+        if (str_starts_with($url, $baseDir)) {
             $url = substr($url, strlen($baseDir));
         }
 
         $url = explode('/', filter_var(rtrim($url, '/'), FILTER_SANITIZE_URL));
 
         $controllerName = !empty($url[0]) ? ucfirst($url[0]) . 'Controller' : 'HomeController';
-        $methodName = isset($url[1]) ? $url[1] : 'index';
+        $methodName = $url[1] ?? 'index';
         $params = array_slice($url, 2);
 
         $controllerClass = "\\App\\Controllers\\$controllerName";

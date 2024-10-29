@@ -11,9 +11,9 @@ class App
         $this->router = $router;
     }
 
-    public function run()
+    public function run(): void
     {
-        $url = isset($_GET['url']) ? $_GET['url'] : '';
+        $url = $_GET['url'] ?? '';
         $this->router->dispatch($url);
     }
 }
