@@ -15,18 +15,19 @@
                 <div class="card-body">
                     <h2 class="text-center mb-4">Registre-se no Agendify</h2>
 
-                    <?php if (isset($errorMessage)): ?>
+                    <?php if (isset($errorMessage) && !empty($errorMessage)): ?>
                         <div class="alert alert-danger">
-                            <?php echo $errorMessage; ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php if (isset($successMessage)): ?>
-                        <div class="alert alert-success">
-                            <?php echo $successMessage; ?>
+                            <?php echo htmlspecialchars($errorMessage); ?>
                         </div>
                     <?php endif; ?>
 
-                    <form action="register/register" method="POST">
+                    <?php if (isset($successMessage) && !empty($successMessage)): ?>
+                        <div class="alert alert-success">
+                            <?php echo htmlspecialchars($successMessage); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <form action="/Agendify/public/register/register" method="POST">
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome Completo</label>
                             <input type="text" class="form-control" id="nome" name="name" placeholder="Digite seu nome completo" required>
