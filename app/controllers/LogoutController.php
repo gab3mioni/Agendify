@@ -12,7 +12,7 @@ class LogoutController
         $this->authService = new AuthService();
     }
 
-    public function index()
+    public function index(): void
     {
         $this->authService->logout();
     }
