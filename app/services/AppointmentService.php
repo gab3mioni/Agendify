@@ -9,11 +9,17 @@ use App\Services\Validation\TimeValidator;
 
 class AppointmentService
 {
+    private AgendaModel $agendaModel;
+
+    public function __construct()
+    {
+        $this->agendaModel = new AgendaModel();
+    }
+
     public function createAppointment(array $data): bool
     {
         $dateValidator = new DateValidator();
         $timeValidator = new TimeValidator();
-        $agendaModel = new AgendaModel();
 
         if (!$dateValidator->validateDate($data['date'])) {
             return false;
@@ -23,7 +29,7 @@ class AppointmentService
             return false;
         }
 
-        return $agendaModel->createAppointment(
+        return $this->agendaModel->createAppointment(
             $data['userId'],
             $data['title'],
             $data['description'],
@@ -33,5 +39,10 @@ class AppointmentService
             $data['reminderEmail'] ?? 'false',
             $data['reminderWhatsapp'] ?? 'true'
         );
+    }
+
+    public function getAppointments(int $userId): array
+    {
+        return $this->agendaModel->getAppointments($userId);
     }
 }

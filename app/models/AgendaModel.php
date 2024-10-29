@@ -33,4 +33,14 @@ class AgendaModel
 
         return $stmt->rowCount() > 0;
     }
+
+    public function getAppointments(int $userId)
+    {
+        $query = "SELECT * FROM appointments WHERE user_id = :user_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

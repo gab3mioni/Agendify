@@ -19,54 +19,80 @@
 
 <div class="content">
     <div class="container mt-5">
-        <h1>Agenda</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Agenda</h1>
 
-        <div class="mt-5">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
-                + Adicionar compromisso
-            </button>
-        </div>
+                <div class="mt-5">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#addAppointmentModal">
+                        + Adicionar compromisso
+                    </button>
+                </div>
 
-        <div class="modal fade" id="addAppointmentModal" tabindex="-1" aria-labelledby="addAppointmentModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addAppointmentModalLabel">Adicionar Compromisso</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal fade" id="addAppointmentModal" tabindex="-1"
+                     aria-labelledby="addAppointmentModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addAppointmentModalLabel">Adicionar Compromisso</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="agenda/addAppointment">
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Título</label>
+                                        <input type="text" class="form-control" name="title" id="title" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Descrição</label>
+                                        <textarea class="form-control" name="description" id="description" rows="3"
+                                                  required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="date" class="form-label">Data</label>
+                                        <input type="date" class="form-control" name="date" id="date" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="start_time" class="form-label">Hora de Início</label>
+                                        <input type="time" class="form-control" name="start_time" id="start_time"
+                                               required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="end_time" class="form-label">Hora de Término</label>
+                                        <input type="time" class="form-control" name="end_time" id="end_time" required>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <form method="POST" action="agenda/addAppointment">
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Título</label>
-                                <input type="text" class="form-control" name="title" id="title" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Descrição</label>
-                                <textarea class="form-control" name="description" id="description" rows="3" required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="date" class="form-label">Data</label>
-                                <input type="date" class="form-control" name="date" id="date" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="start_time" class="form-label">Hora de Início</label>
-                                <input type="time" class="form-control" name="start_time" id="start_time" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="end_time" class="form-label">Hora de Término</label>
-                                <input type="time" class="form-control" name="end_time" id="end_time" required>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                <button type="submit" class="btn btn-primary">Adicionar</button>
-                            </div>
-                        </form>
-                    </div>
-
                 </div>
             </div>
-        </div>
 
+
+            <div class="col-md-6">
+
+                <h1>Meus Compromissos</h1>
+                <ul>
+                    <?php foreach ($appointments as $appointment): ?>
+                        <li>
+                            <strong>Data:</strong> <?= htmlspecialchars($appointment['appointment_date']) ?> <br>
+                            <strong>Hora:</strong> <?= htmlspecialchars($appointment['start_time']) ?> <br>
+                            <strong>Descrição:</strong> <?= htmlspecialchars($appointment['description']) ?>
+                        </li>
+                        <br>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 

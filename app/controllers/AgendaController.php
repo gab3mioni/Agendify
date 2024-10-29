@@ -9,9 +9,19 @@ use Core\Controller;
 
 class AgendaController extends Controller
 {
+    private $authService;
+    private $appointmentService;
+
+    public function __construct()
+    {
+        $this->authService = new AuthService();
+        $this->appointmentService = new AppointmentService();
+    }
     public function index(): void
     {
-        $this->view('agenda');
+        $userId = $this->authService->getUserId();
+        $appointments = $this->appointmentService->getAppointments($userId);
+        require_once __DIR__ . '/../views/agenda.php';
     }
 
     public function addAppointment(): void
