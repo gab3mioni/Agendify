@@ -126,7 +126,7 @@ Para manter a consistência no projeto, siga os seguintes padrões de estilo:
   composer check-style
   ```
 2. Para adequar automaticamente o código de acordo com o teste acima:
-  ```
+  ```bash
   composer fix-style
   ```
 ---
