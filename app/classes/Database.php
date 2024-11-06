@@ -1,12 +1,14 @@
 <?php
 
+namespace App\Classes;
+
 class Database
 {
     private $pdo;
 
     public function __construct()
     {
-        $config = require_once __DIR__ . '/../config/config.php';
+        $config = include_once __DIR__ . '/../config/config.php';
 
         try {
             $this->pdo = new PDO(

@@ -78,19 +78,45 @@
             </div>
 
 
-            <div class="col-md-6">
 
-                <h1>Meus Compromissos</h1>
-                <ul>
-                    <?php foreach ($appointments as $appointment): ?>
-                        <li>
-                            <strong>Data:</strong> <?= htmlspecialchars($appointment['appointment_date']) ?> <br>
-                            <strong>Hora:</strong> <?= htmlspecialchars($appointment['start_time']) ?> <br>
-                            <strong>Descrição:</strong> <?= htmlspecialchars($appointment['description']) ?>
-                        </li>
-                        <br>
-                    <?php endforeach; ?>
-                </ul>
+
+            <div class="col-md-12">
+
+                <div class="card bg-light my-4">
+                    <div class="card-header">
+                        <h4>Meus Compromissos</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Hora</th>
+                                <th>Titulo</th>
+                                <th>Descrição</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- NÃO MEXER NO CÓDIGO A SEGUIR -->
+                            <?php if (!empty($appointments)) : ?>
+                                <?php foreach ($appointments as $appointment): ?>
+                                    <tr>
+                                        <td><?php echo date('d/m/Y', strtotime($appointment['appointment_date'])) ?></td>
+                                        <td><?php echo htmlspecialchars($appointment['start_time']) ?></td>
+                                        <td><?php echo htmlspecialchars($appointment['title']) ?>  </td>
+                                        <td><?php echo htmlspecialchars($appointment['description']) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="4" class="text-center">Nenhuma transação encontrada.</td>
+                                </tr>
+                            <?php endif; ?>
+                            <!-- NÃO MEXER NO CÓDIGO ACIMA -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

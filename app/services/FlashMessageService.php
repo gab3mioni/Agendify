@@ -11,7 +11,7 @@ class FlashMessageService
 
     public function getFlashMessage(string $userId): ?string
     {
-        if(isset($_SESSION[$userId])){
+        if(isset($_SESSION[$userId])) {
             $message = $_SESSION[$userId];
             unset($_SESSION[$userId]);
             return $message;

@@ -35,14 +35,14 @@ class LoginController extends Controller
                     exit;
                 } else {
                     $errorMessage = $user ? 'Senha incorreta.' : 'E-mail não encontrado.';
-                    require_once __DIR__ . '/../views/login.php';
+                    include_once __DIR__ . '/../views/login.php';
                 }
             } else {
                 $errorMessage = 'Por favor, preencha todos os campos.';
-                require_once __DIR__ . '/../views/login.php';
+                include_once __DIR__ . '/../views/login.php';
             }
         } else {
-            require_once __DIR__ . '/../views/login.php';
+            include_once __DIR__ . '/../views/login.php';
         }
     }
 }

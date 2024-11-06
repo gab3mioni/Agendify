@@ -22,10 +22,10 @@
     <div class="container mt-5">
         <h1 class="text-center">Informações do Usuário</h1>
 
-        <?php if (isset($errorMessage)): ?>
+        <?php if (isset($errorMessage)) : ?>
             <div class="alert alert-danger"><?php echo htmlspecialchars($errorMessage); ?></div>
         <?php endif; ?>
-        <?php if (isset($successMessage)): ?>
+        <?php if (isset($successMessage)) : ?>
             <div class="alert alert-success"><?php echo htmlspecialchars($successMessage); ?></div>
         <?php endif; ?>
 

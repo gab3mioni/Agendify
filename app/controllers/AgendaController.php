@@ -21,7 +21,7 @@ class AgendaController extends Controller
     {
         $userId = $this->authService->getUserId();
         $appointments = $this->appointmentService->getAppointments($userId);
-        require_once __DIR__ . '/../views/agenda.php';
+        include_once __DIR__ . '/../views/agenda.php';
     }
 
     public function addAppointment(): void
@@ -52,7 +52,9 @@ class AgendaController extends Controller
             'reminderWhatsapp' => "true"
         ];
 
-        if (empty($data['title']) || empty($data['description']) || empty($data['date']) || empty($data['startTime']) || empty($data['endTime'])) {
+        if (empty($data['title']) || empty($data['description']) || empty($data['date']) || empty($data['startTime'])
+            || empty($data['endTime'])
+        ) {
             $flashMessageService->setFlashMessage('errorMessage', "Todos os campos são obrigatórios!");
             header('Location: /Agendify/public/agenda');
             return;

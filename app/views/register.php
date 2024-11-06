@@ -15,13 +15,13 @@
                 <div class="card-body">
                     <h2 class="text-center mb-4">Registre-se no Agendify</h2>
 
-                    <?php if (isset($errorMessage) && !empty($errorMessage)): ?>
+                    <?php if (isset($errorMessage) && !empty($errorMessage)) : ?>
                         <div class="alert alert-danger">
                             <?php echo htmlspecialchars($errorMessage); ?>
                         </div>
                     <?php endif; ?>
 
-                    <?php if (isset($successMessage) && !empty($successMessage)): ?>
+                    <?php if (isset($successMessage) && !empty($successMessage)) : ?>
                         <div class="alert alert-success">
                             <?php echo htmlspecialchars($successMessage); ?>
                         </div>

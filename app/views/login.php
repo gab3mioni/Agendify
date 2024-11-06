@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h2 class="text-center mb-4">Login</h2>
 
-                    <?php if (isset($errorMessage)): ?>
+                    <?php if (isset($errorMessage)) : ?>
                         <div class="alert alert-danger">
                             <?php echo $errorMessage; ?>
                         </div>
