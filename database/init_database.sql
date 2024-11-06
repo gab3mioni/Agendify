@@ -14,7 +14,7 @@ CREATE TABLE appointments
     user_id                  INT          NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     title                    VARCHAR(150) NOT NULL,
     description              TEXT,
-    appointment_date         TIMESTAMP    NOT NULL,
+    appointment_date         DATE    NOT NULL,
     start_time               TIME NOT NULL,
     end_time                 TIME NOT NULL,
     reminder_email           BOOLEAN   DEFAULT FALSE,
