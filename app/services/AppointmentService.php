@@ -2,30 +2,33 @@
 
 namespace App\Services;
 
-use AllowDynamicProperties;
 use App\Models\AgendaModel;
+use App\Helpers\TimeHelper;
 use App\Services\Validation\DateValidator;
 use App\Services\Validation\TimeValidator;
 
 class AppointmentService
 {
-    private AgendaModel $agendaModel;
+    private $agendaModel;
+    private $dateValidator;
+    private $timeValidator;
 
     public function __construct()
     {
         $this->agendaModel = new AgendaModel();
+        $this->dateValidator = new DateValidator();
+        $this->timeValidator = new TimeValidator();
     }
 
     public function createAppointment(array $data): bool
     {
-        $dateValidator = new DateValidator();
-        $timeValidator = new TimeValidator();
 
-        if (!$dateValidator->validateDate($data['date'])) {
+
+        if (!$this->dateValidator->validateDate($data['date'])) {
             return false;
         }
 
-        if (!$timeValidator->validate($data['startTime'], $data['endTime'])) {
+        if (!$this->timeValidator->validate($data['startTime'], $data['endTime'])) {
             return false;
         }
 
@@ -43,6 +46,7 @@ class AppointmentService
 
     public function getAppointments(int $userId): array
     {
-        return $this->agendaModel->getAppointments($userId);
+        $appointments = $this->agendaModel->getAppointments($userId);
+        return TimeHelper::formatTimeInAppointments($appointments);
     }
 }
