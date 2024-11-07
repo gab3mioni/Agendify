@@ -14,10 +14,13 @@ class AgendaModel
         $this->pdo = $pdo;
     }
 
-    public function createAppointment($userId, $title, $description, $date, $startTime, $endTime, $reminderEmail, $reminderWhatsapp)
+    public function createAppointment($userId, $title, $description, $date, $startTime,
+                                      $endTime, $reminderEmail, $reminderWhatsapp)
     {
-        $query = "INSERT INTO appointments (user_id, title, description, appointment_date, start_time, end_time, reminder_email, reminder_whatsapp) 
-                  VALUES (:user_id, :title, :description, :appointment_date, :start_time, :end_time, :reminder_email, :reminder_whatsapp)";
+        $query = "INSERT INTO appointments (user_id, title, description, appointment_date, start_time, 
+                  end_time, reminder_email, reminder_whatsapp) 
+                  VALUES (:user_id, :title, :description, :appointment_date, :start_time, 
+                  :end_time, :reminder_email, :reminder_whatsapp)";
 
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
