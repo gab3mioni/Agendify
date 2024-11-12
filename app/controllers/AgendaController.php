@@ -3,69 +3,58 @@
 namespace App\Controllers;
 
 use App\Services\AuthService;
-use App\Services\FlashMessageService;
 use App\Services\AppointmentService;
 use Core\Controller;
 
 class AgendaController extends Controller
 {
-    private $authService;
     private $appointmentService;
+    private $authService;
 
     public function __construct()
     {
         $this->authService = new AuthService();
         $this->appointmentService = new AppointmentService();
     }
+
     public function index(): void
     {
         $userId = $this->authService->getUserId();
         $appointments = $this->appointmentService->getAppointments($userId);
-        include_once __DIR__ . '/../views/agenda.php';
+        $this->view('agenda', ['appointments' => $appointments]);
+    }
+
+    public function logout(): void
+    {
+        $this->authService->logout();
     }
 
     public function addAppointment(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: /Agendify/public/agenda');
-            return;
-        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userId = $this->authService->getUserId();
 
-        $appointmentService = new AppointmentService();
-        $flashMessageService = new FlashMessageService();
-        $authService = new AuthService();
-        $userId = $authService->getUserId();
+            if (!$userId) {
+                $this->logout();
+                return;
+            }
 
-        if (!$userId) {
-            $authService->logout();
-            return;
-        }
+            $data = [
+                'userId' => $userId,
+                'title' => $_POST['title'],
+                'description' => $_POST['description'],
+                'date' => $_POST['date'],
+                'start_time' => $_POST['start_time'],
+                'end_time' => $_POST['end_time'],
+            ];
 
-        $data = [
-            'userId' => $userId,
-            'title' => filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS),
-            'description' => filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS),
-            'date' => filter_input(INPUT_POST, 'date', FILTER_SANITIZE_SPECIAL_CHARS),
-            'startTime' => filter_input(INPUT_POST, 'start_time', FILTER_SANITIZE_SPECIAL_CHARS),
-            'endTime' => filter_input(INPUT_POST, 'end_time', FILTER_SANITIZE_SPECIAL_CHARS),
-            'reminderEmail' => "false",
-            'reminderWhatsapp' => "true"
-        ];
-
-        if (empty($data['title']) || empty($data['description']) || empty($data['date']) || empty($data['startTime'])
-            || empty($data['endTime'])
-        ) {
-            $flashMessageService->setFlashMessage('errorMessage', "Todos os campos são obrigatórios!");
-            header('Location: /Agendify/public/agenda');
-            return;
-        }
-
-        if (!$appointmentService->createAppointment($data)) {
-            $flashMessageService->setFlashMessage('errorMessage', "Erro ao criar o compromisso!");
+            if (!$this->appointmentService->createAppointment($data)) {
+                $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao criar o compromisso.");
+            } else {
+                $this->flashMessageService->setFlashMessage('successMessage', "Compromisso criado com sucesso!");
+            }
         } else {
-            $flashMessageService->setFlashMessage('successMessage', "Compromisso criado com sucesso!");
+            $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao criar o compromisso.");
         }
-
-        header('Location: /Agendify/public/agenda');
     }
 }

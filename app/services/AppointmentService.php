@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Helpers\UrlHelper;
 use App\Models\AgendaModel;
 use App\Helpers\TimeHelper;
+use App\Services\FlashMessageService;
 use App\Services\Validation\DateValidator;
 use App\Services\Validation\TimeValidator;
 
@@ -12,17 +14,43 @@ class AppointmentService
     private $agendaModel;
     private $dateValidator;
     private $timeValidator;
+    private $flashMessageService;
 
     public function __construct()
     {
         $this->agendaModel = new AgendaModel();
         $this->dateValidator = new DateValidator();
         $this->timeValidator = new TimeValidator();
+        $this->flashMessageService = new FlashMessageService();
+    }
+
+    public function sanitizeAgendaData(array $data): array
+    {
+        return [
+            'user_id' => filter_var($data['user_id'], FILTER_SANITIZE_NUMBER_INT),
+            'title' => filter_var($data['title'], FILTER_SANITIZE_SPECIAL_CHARS),
+            'description' => filter_var($data['description'], FILTER_SANITIZE_SPECIAL_CHARS),
+            'date' => filter_var($data['date'], FILTER_SANITIZE_SPECIAL_CHARS),
+            'startTime' => filter_var($data['start_time'], FILTER_SANITIZE_SPECIAL_CHARS),
+            'endTime' => filter_var($data['end_time'], FILTER_SANITIZE_SPECIAL_CHARS),
+        ];
     }
 
     public function createAppointment(array $data): bool
     {
+        $data = $this->sanitizeAgendaData($data);
 
+        if (
+            empty($data['user_id']) ||
+            empty($data['title']) ||
+            empty($data['description']) ||
+            empty($data['date']) ||
+            empty($data['startTime']) ||
+            empty($data['endTime'])
+        ) {
+            header('Location: ' . UrlHelper::baseUrl('agenda'));
+            return false;
+        }
 
         if (!$this->dateValidator->validateDate($data['date'])) {
             return false;
@@ -33,14 +61,14 @@ class AppointmentService
         }
 
         return $this->agendaModel->createAppointment(
-            $data['userId'],
+            $data['user_id'],
             $data['title'],
             $data['description'],
             $data['date'],
-            $data['startTime'],
-            $data['endTime'],
+            $data['start_time'],
+            $data['end_time'],
             $data['reminderEmail'] ?? 'false',
-            $data['reminderWhatsapp'] ?? 'true'
+            $data['reminderWhatsapp'] ?? 'false'
         );
     }
 
