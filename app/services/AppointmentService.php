@@ -36,6 +36,11 @@ class AppointmentService
         ];
     }
 
+    public function getAppointmentId(int $user_id, string $title, string $start_time, string $end_time): int
+    {
+        return $this->agendaModel->getAppointmentId($user_id, $title, $start_time, $end_time);
+    }
+
     public function createAppointment(array $data): bool
     {
         $data = $this->sanitizeAgendaData($data);
@@ -69,6 +74,38 @@ class AppointmentService
             $data['end_time'],
             $data['reminderEmail'] ?? 'false',
             $data['reminderWhatsapp'] ?? 'false'
+        );
+    }
+
+    public function editAppointment(int $appointment_id, array $data): bool
+    {
+        if (
+            empty($appointment_id) ||
+            empty($data['title']) ||
+            empty($data['description']) ||
+            empty($data['date']) ||
+            empty($data['startTime']) ||
+            empty($data['endTime'])
+        ) {
+            header('Location: ' . UrlHelper::baseUrl('agenda'));
+            return false;
+        }
+
+        if (!$this->dateValidator->validateDate($data['date'])) {
+            return false;
+        }
+
+        if (!$this->timeValidator->validate($data['startTime'], $data['endTime'])) {
+            return false;
+        }
+
+        return $this->agendaModel->editAppointment(
+            $appointment_id,
+            $data['title'],
+            $data['description'],
+            $data['date'],
+            $data['start_time'],
+            $data['end_time'],
         );
     }
 

@@ -57,4 +57,39 @@ class AgendaController extends Controller
             $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao criar o compromisso.");
         }
     }
+
+    public function editAppointment(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user_id = $this->authService->getUserId();
+
+            if (!$user_id) {
+                $this->logout();
+                return;
+            }
+
+            $data = [
+                'title' => $_POST['title'],
+                'description' => $_POST['description'],
+                'date' => $_POST['date'],
+                'start_time' => $_POST['start_time'],
+                'end_time' => $_POST['end_time'],
+            ];
+
+            $appointment_id = $this->appointmentService->getAppointmentId(
+                $user_id,
+                $data['date'],
+                $data['start_time'],
+                $data['end_time']
+            );
+
+            if (!$this->appointmentService->editAppointment($appointment_id, $data)) {
+                $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao editar o compromisso.");
+            } else {
+                $this->flashMessageService->setFlashMessage('successMessage', "Compromisso editado com sucesso!");
+            }
+        } else {
+            $this->flahsMessageService->setFlashMessage('errorMessage', "Erro ao editar o compromisso.");
+        }
+    }
 }
