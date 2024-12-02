@@ -58,6 +58,13 @@ class AgendaModel extends BaseModel
         return $this->executeQuery($query, $data);
     }
 
+    public function deleteAppointment(int $appointment_id): bool
+    {
+        $query = "DELETE FROM appointments WHERE id = :id";
+        return $this->executeQuery($query, ["id" => $appointment_id]);
+    }
+
+
     public function getAppointmentId(int $user_id, string $title, string $start_time, string $end_time): int
     {
         $data = [

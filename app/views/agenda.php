@@ -148,7 +148,7 @@
             </div>
             <div class="modal-footer">
                 <form method="POST" action="agenda/deleteAppointment">
-                    <input type="hidden" name="id" id="delete-id">
+                    <input type="hidden" name="appointment_id" id="delete-id">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-danger">Excluir</button>
                 </form>

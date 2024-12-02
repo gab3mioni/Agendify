@@ -92,4 +92,27 @@ class AgendaController extends Controller
             $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao editar o compromisso.");
         }
     }
+
+    public function deleteAppointment(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user_id = $this->authService->getUserId();
+
+            if (!$user_id) {
+                $this->logout();
+                return;
+            }
+
+            $appointment_id = $_POST['appointment_id'];
+
+            if (!$this->agendaService->deleteAppointment($appointment_id)) {
+                $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao deletar o compromisso.");
+            } else {
+                $this->flashMessageService->setFlashMessage('successMessage', "Compromisso deletado com sucesso!");
+                header('Location: ' . UrlHelper::baseUrl('agenda'));
+            }
+        } else {
+            $this->flashMessageService->setFlashMessage('sucessMessage', "Erro ao deletar o compromisso.");
+        }
+    }
 }

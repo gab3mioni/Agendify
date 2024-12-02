@@ -111,6 +111,16 @@ class AgendaService
         );
     }
 
+    public function deleteAppointment(int $appointment_id): bool
+    {
+        if (empty($appointment_id)) {
+            header('Location: ' . UrlHelper::baseUrl('agenda'));
+            return false;
+        }
+
+        return $this->agendaModel->deleteAppointment($appointment_id);
+    }
+
     public function getAppointments(int $userId): array
     {
         $appointments = $this->agendaModel->getAppointments($userId);
