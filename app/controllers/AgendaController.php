@@ -2,25 +2,29 @@
 
 namespace App\Controllers;
 
+use App\Helpers\UrlHelper;
 use App\Services\AuthService;
-use App\Services\AppointmentService;
+use App\Services\AgendaService;
+use App\Services\FlashMessageService;
 use Core\Controller;
 
 class AgendaController extends Controller
 {
-    private $appointmentService;
+    private $agendaService;
     private $authService;
+    private $flashMessageService;
 
     public function __construct()
     {
         $this->authService = new AuthService();
-        $this->appointmentService = new AppointmentService();
+        $this->agendaService = new AgendaService();
+        $this->flashMessageService = new FlashMessageService();
     }
 
     public function index(): void
     {
         $userId = $this->authService->getUserId();
-        $appointments = $this->appointmentService->getAppointments($userId);
+        $appointments = $this->agendaService->getAppointments($userId);
         $this->view('agenda', ['appointments' => $appointments]);
     }
 
@@ -48,7 +52,7 @@ class AgendaController extends Controller
                 'end_time' => $_POST['end_time'],
             ];
 
-            if (!$this->appointmentService->createAppointment($data)) {
+            if (!$this->agendaService->createAppointment($data)) {
                 $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao criar o compromisso.");
             } else {
                 $this->flashMessageService->setFlashMessage('successMessage', "Compromisso criado com sucesso!");
@@ -69,6 +73,7 @@ class AgendaController extends Controller
             }
 
             $data = [
+                'appointment_id' => $_POST['appointment_id'],
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
                 'date' => $_POST['date'],
@@ -76,20 +81,15 @@ class AgendaController extends Controller
                 'end_time' => $_POST['end_time'],
             ];
 
-            $appointment_id = $this->appointmentService->getAppointmentId(
-                $user_id,
-                $data['date'],
-                $data['start_time'],
-                $data['end_time']
-            );
 
-            if (!$this->appointmentService->editAppointment($appointment_id, $data)) {
+            if (!$this->agendaService->editAppointment($data)) {
                 $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao editar o compromisso.");
             } else {
                 $this->flashMessageService->setFlashMessage('successMessage', "Compromisso editado com sucesso!");
+                header('Location: ' . UrlHelper::baseUrl('agenda'));
             }
         } else {
-            $this->flahsMessageService->setFlashMessage('errorMessage', "Erro ao editar o compromisso.");
+            $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao editar o compromisso.");
         }
     }
 }

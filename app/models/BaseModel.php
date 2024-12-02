@@ -21,6 +21,22 @@ class BaseModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    protected function fetchSingleValue(string $query, array $params): ?int
+    {
+        $stmt = $this->pdo->prepare($query);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result && isset($result[array_key_first($result)])) {
+            return (int)$result[array_key_first($result)];
+        }
+
+        return 0;
+    }
+
     protected function executeQuery(string $query, array $params): bool
     {
         $stmt = $this->pdo->prepare($query);

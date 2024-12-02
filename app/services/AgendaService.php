@@ -9,7 +9,7 @@ use App\Services\FlashMessageService;
 use App\Services\Validation\DateValidator;
 use App\Services\Validation\TimeValidator;
 
-class AppointmentService
+class AgendaService
 {
     private $agendaModel;
     private $dateValidator;
@@ -77,35 +77,37 @@ class AppointmentService
         );
     }
 
-    public function editAppointment(int $appointment_id, array $data): bool
+    public function editAppointment(array $data): bool
     {
         if (
-            empty($appointment_id) ||
+            empty($data['appointment_id']) ||
             empty($data['title']) ||
             empty($data['description']) ||
             empty($data['date']) ||
-            empty($data['startTime']) ||
-            empty($data['endTime'])
+            empty($data['start_time']) ||
+            empty($data['end_time'])
         ) {
             header('Location: ' . UrlHelper::baseUrl('agenda'));
             return false;
         }
 
         if (!$this->dateValidator->validateDate($data['date'])) {
+            header('Location: ' . UrlHelper::baseUrl('agenda'));
             return false;
         }
 
-        if (!$this->timeValidator->validate($data['startTime'], $data['endTime'])) {
+        if (!$this->timeValidator->validate($data['start_time'], $data['end_time'])) {
+            header('Location: ' . UrlHelper::baseUrl('agenda'));
             return false;
         }
 
         return $this->agendaModel->editAppointment(
-            $appointment_id,
+            $data['appointment_id'],
             $data['title'],
             $data['description'],
             $data['date'],
             $data['start_time'],
-            $data['end_time'],
+            $data['end_time']
         );
     }
 

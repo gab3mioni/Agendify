@@ -33,28 +33,29 @@ class AgendaModel extends BaseModel
     }
 
     public function editAppointment(
-        $appointment_id,
-        $title,
-        $description,
-        $date,
-        $startTime,
-        $endTime
+        int $appointment_id,
+        string $title,
+        string $description,
+        string $date,
+        string $start_time,
+        string $end_time
     ): bool {
+        $data = [
+            "title" => $title,
+            "description" => $description,
+            "appointment_date" => $date,
+            "start_time" => $start_time,
+            "end_time" => $end_time,
+            "id" => $appointment_id
+        ];
+
         $query = "UPDATE appointments SET title = :title, 
                                           description = :description, 
                                           appointment_date = :appointment_date,
                                           start_time = :start_time,
                                           end_time = :end_time
-                                          WHERE id = :id,
-                                          ";
-        return $this->executeQuery($query, [
-            "id" => $appointment_id,
-            "title" => $title,
-            "description" => $description,
-            "appointment_date" => $date,
-            "start_time" => $startTime,
-            "end_time" => $endTime
-        ]);
+                                          WHERE id = :id";
+        return $this->executeQuery($query, $data);
     }
 
     public function getAppointmentId(int $user_id, string $title, string $start_time, string $end_time): int
@@ -66,10 +67,11 @@ class AgendaModel extends BaseModel
             "end_time" => $end_time
         ];
         $query = "SELECT id FROM appointments WHERE user_id = :user_id AND 
-                                  title = :title AND 
+                                  title = :title AND
                                   start_time = :start_time AND 
                                   end_time = :end_time";
-        return $this->executeQuery($query, $data);
+
+        return $this->fetchSingleValue($query, $data) ?? 0;
     }
 
     public function getAppointments(int $userId): array

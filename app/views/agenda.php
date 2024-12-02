@@ -103,7 +103,7 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="agenda/editAppointment">
-                    <input type="hidden" name="id" id="edit-id">
+                    <input type="hidden" name="appointment_id" id="edit-id">
                     <div class="mb-3">
                         <label for="edit-title" class="form-label">Título</label>
                         <input type="text" class="form-control" name="title" id="edit-title" required>
