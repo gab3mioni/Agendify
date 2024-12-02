@@ -27,18 +27,13 @@ class AgendaService
     public function sanitizeAgendaData(array $data): array
     {
         return [
-            'user_id' => filter_var($data['user_id'], FILTER_SANITIZE_NUMBER_INT),
+            'userId' => filter_var($data['userId'], FILTER_SANITIZE_NUMBER_INT),
             'title' => filter_var($data['title'], FILTER_SANITIZE_SPECIAL_CHARS),
             'description' => filter_var($data['description'], FILTER_SANITIZE_SPECIAL_CHARS),
             'date' => filter_var($data['date'], FILTER_SANITIZE_SPECIAL_CHARS),
-            'startTime' => filter_var($data['start_time'], FILTER_SANITIZE_SPECIAL_CHARS),
-            'endTime' => filter_var($data['end_time'], FILTER_SANITIZE_SPECIAL_CHARS),
+            'start_time' => filter_var($data['start_time'], FILTER_SANITIZE_SPECIAL_CHARS),
+            'end_time' => filter_var($data['end_time'], FILTER_SANITIZE_SPECIAL_CHARS),
         ];
-    }
-
-    public function getAppointmentId(int $user_id, string $title, string $start_time, string $end_time): int
-    {
-        return $this->agendaModel->getAppointmentId($user_id, $title, $start_time, $end_time);
     }
 
     public function createAppointment(array $data): bool
@@ -46,12 +41,12 @@ class AgendaService
         $data = $this->sanitizeAgendaData($data);
 
         if (
-            empty($data['user_id']) ||
+            empty($data['userId']) ||
             empty($data['title']) ||
             empty($data['description']) ||
             empty($data['date']) ||
-            empty($data['startTime']) ||
-            empty($data['endTime'])
+            empty($data['start_time']) ||
+            empty($data['end_time'])
         ) {
             header('Location: ' . UrlHelper::baseUrl('agenda'));
             return false;
@@ -61,12 +56,12 @@ class AgendaService
             return false;
         }
 
-        if (!$this->timeValidator->validate($data['startTime'], $data['endTime'])) {
+        if (!$this->timeValidator->validate($data['start_time'], $data['end_time'])) {
             return false;
         }
 
         return $this->agendaModel->createAppointment(
-            $data['user_id'],
+            $data['userId'],
             $data['title'],
             $data['description'],
             $data['date'],

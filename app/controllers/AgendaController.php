@@ -56,6 +56,7 @@ class AgendaController extends Controller
                 $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao criar o compromisso.");
             } else {
                 $this->flashMessageService->setFlashMessage('successMessage', "Compromisso criado com sucesso!");
+                header('Location: ' . UrlHelper::baseUrl('agenda'));
             }
         } else {
             $this->flashMessageService->setFlashMessage('errorMessage', "Erro ao criar o compromisso.");
