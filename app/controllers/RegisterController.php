@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Services\RegisterService;
@@ -21,7 +22,13 @@ class RegisterController extends Controller
             $confirm_password = $_POST['confirm_password'] ?? null;
 
             $registerService = new RegisterService();
-            $validationResult = $registerService->validateRegistrationData($name, $email, $phone, $password, $confirm_password);
+            $validationResult = $registerService->validateRegistrationData(
+                $name,
+                $email,
+                $phone,
+                $password,
+                $confirm_password
+            );
 
             if (!$validationResult['isValid']) {
                 $this->view('register', ['errorMessage' => $validationResult['message']]);
