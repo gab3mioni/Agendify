@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Helpers\UrlHelper;
 use App\Models\LoginModel;
 use App\Services\AuthService;
 use Core\Controller;
@@ -11,11 +12,6 @@ class LoginController extends Controller
     public function index(): void
     {
         $this->view('login');
-    }
-
-    public function base_url($path = ''): string
-    {
-        return 'http://' . $_SERVER['HTTP_HOST'] . '/Agendify/public/' . ltrim($path, '/');
     }
 
     public function login(): void
@@ -31,7 +27,7 @@ class LoginController extends Controller
                 if ($user && password_verify($password, $user['password'])) {
                     $authService = new AuthService();
                     $authService->login($email, $user['id']);
-                    header('Location: ' . $this->base_url('dashboard'));
+                    header('Location: ' . UrlHelper::baseUrl('dashboard'));
                     exit;
                 } else {
                     $errorMessage = $user ? 'Senha incorreta.' : 'E-mail não encontrado.';

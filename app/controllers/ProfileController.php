@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Helpers\UrlHelper;
 use App\Models\ProfileModel;
 use App\Services\AuthService;
 use App\Services\Validation\EmailValidator;
@@ -18,7 +19,7 @@ class ProfileController extends Controller
 
         if (!$this->authService->isAuthenticated()) {
             $_SESSION['errorMessage'] = "Usuário não encontrado!";
-            header('Location: /Agendify/public/login');
+            header('Location: ' . UrlHelper::baseUrl('login'));
             exit;
         }
     }
@@ -46,7 +47,7 @@ class ProfileController extends Controller
             include '../app/views/profile.php';
         } else {
             $_SESSION['errorMessage'] = "Usuário não encontrado!";
-            header('Location: /Agendify/public/login');
+            header('Location: ' . UrlHelper::baseUrl('login'));
         }
     }
 
@@ -67,7 +68,7 @@ class ProfileController extends Controller
             } else {
                 $_SESSION['errorMessage'] = "E-mail inválido.";
             }
-            header('Location: /Agendify/public/profile');
+            header('Location: ' . UrlHelper::baseUrl('profile'));
             exit;
         }
         $this->profile();
@@ -90,7 +91,7 @@ class ProfileController extends Controller
             } else {
                 $_SESSION['errorMessage'] = "Telefone inválido.";
             }
-            header('Location: /Agendify/public/profile');
+            header('Location: ' . UrlHelper::baseUrl('profile'));
             exit;
         }
         $this->profile();
