@@ -1,9 +1,6 @@
 # Agendify
 Sistema em PHP que permite um usuário agendar compromissos e reuniões.
 
-O sistema ainda está na sua fase inicial de desenvolvimento.
-
-
 ## 🛠️ Construído com
 
 * [PHP 8.3](https://www.php.net/docs.php) - Utilizado para desenvolver o backend
